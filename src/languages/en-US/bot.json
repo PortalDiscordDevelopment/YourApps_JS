@@ -30,7 +30,8 @@
 		"CONTENT": "Message content",
 		"DELETING": "Deleting...",
 		"APPS": "Applications",
-		"SKIP": "Skip"
+		"SKIP": "Skip",
+		"INFO": "Bot info"
 	},
 	"CONFIG": {
 		"NO_CONFIG": "This guild does not appear to have any config options changed.",
@@ -206,7 +207,8 @@
 			"CONTENT_SUCCESS": "Successfully edited appbutton content.",
 			"APPS_SUCCESS": "Successfully edited appbutton applications."
 		},
-		"QUESTIONS_TITLE": "{{app}}'s questions"
+		"QUESTIONS_TITLE": "{{app}}'s questions",
+		"INFO_DESCRIPTION": "Displays info about the bot"
 	},
 	"BLOCKED": {
 		"OWNER_ONLY": "You cannot run this command, as you are not an owner of the bot.",

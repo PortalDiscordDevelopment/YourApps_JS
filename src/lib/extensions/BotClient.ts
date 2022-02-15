@@ -62,7 +62,7 @@ export class BotClient extends AkairoClient {
 			cachedAt: number;
 		}
 	>;
-	public supportedLangs = ['en-US', 'de', 'nl'];
+	public supportedLangs = ['en-US', 'de', 'es', 'nl'];
 
 	public constructor(config: BotConfig) {
 		super(

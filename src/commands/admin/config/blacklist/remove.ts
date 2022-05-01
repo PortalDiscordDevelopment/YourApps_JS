@@ -3,6 +3,7 @@ import { BotCommand } from '@lib/ext/BotCommand';
 import { Guild } from '@lib/models';
 import { Role } from 'discord.js';
 import { LogEvent } from '@lib/ext/Util';
+import { Argument } from 'discord-akairo';
 
 export default class ConfigBlacklistRemoveCommand extends BotCommand {
 	public constructor() {
@@ -18,14 +19,14 @@ export default class ConfigBlacklistRemoveCommand extends BotCommand {
 			args: [
 				{
 					id: 'role',
-					type: 'role'
+					type: Argument.union('role', 'number')
 				}
 			],
 			channel: 'guild',
 			permissionCheck: 'admin'
 		});
 	}
-	async exec(message: Message, { role }: { role?: Role }) {
+	async exec(message: Message, { role }: { role?: Role | number }) {
 		if (!role) {
 			await message.util!.send(
 				await this.client.t('ARGS.PLEASE_GIVE', message, { type: 'role' })
@@ -40,28 +41,29 @@ export default class ConfigBlacklistRemoveCommand extends BotCommand {
 				id: message.guild!.id
 			}
 		});
-		if (!guildEntry.blacklistroles.includes(role.id)) {
+		const roleId = role instanceof Role ? role.id : role.toString();
+		if (!guildEntry.blacklistroles.includes(roleId)) {
 			await message.util!.send(
 				await this.client.t('CONFIG.BLACKLIST_ROLE_NOT_ADDED', message)
 			);
 			return;
 		}
 		guildEntry.blacklistroles.splice(
-			guildEntry.blacklistroles.indexOf(role.id),
+			guildEntry.blacklistroles.indexOf(roleId),
 			1
 		);
 		guildEntry.changed('blacklistroles', true);
 		await guildEntry.save();
 		await message.util!.send(
 			await this.client.t('CONFIG.BLACKLIST_ROLE_REMOVED', message, {
-				roleID: role.id
+				roleID: roleId
 			})
 		);
 		await this.client.util.logEvent(
 			message.guild!.id,
 			message.author,
 			LogEvent.BLACKLIST_ROLE_REMOVE,
-			{ roleID: role.id }
+			{ roleID: roleId }
 		);
 	}
 }

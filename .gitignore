@@ -182,4 +182,5 @@ dist
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,yarn,node
 
-src/options/config.ts
+src/options/*
+!src/options/config.example.ts

@@ -1,5 +1,6 @@
 {
 	"name": "yourapps",
+	"version": "5.0.0",
 	"packageManager": "yarn@3.2.1",
 	"dependencies": {
 		"@sapphire/decorators": "^4.3.6",

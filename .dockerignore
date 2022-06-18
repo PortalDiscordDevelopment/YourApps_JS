@@ -1,0 +1,9 @@
+src/options/*
+!src/options/config.docker.ts
+
+.vscode
+.github
+.git
+.prettier*
+*.md
+dist

@@ -1,0 +1,11 @@
+services:
+  bot:
+    build: .
+    restart: always
+  postgresql:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: yourapps
+      POSTGRES_PASSWORD: yourapps
+      POSTGRES_DB: yourapps

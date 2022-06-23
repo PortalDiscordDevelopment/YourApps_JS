@@ -1,7 +1,10 @@
 services:
   bot:
-    build: .
+    image: yourapps
     restart: always
+    depends_on:
+      postgresql:
+        condition: service_healthy
   postgresql:
     image: postgres
     restart: always
@@ -9,3 +12,12 @@ services:
       POSTGRES_USER: yourapps
       POSTGRES_PASSWORD: yourapps
       POSTGRES_DB: yourapps
+    ports:
+      - 8432:5432
+    healthcheck:
+        test: PGUSER=yourapps pg_isready
+        interval: 5s
+        timeout: 3s
+        retries: 5
+        start_period: 5s
+

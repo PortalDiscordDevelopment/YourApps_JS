@@ -30,7 +30,11 @@
 		"fmt": "prettier --write .",
 		"fmt:check": "prettier --check .",
 		"dev": "yarn build && (yarn watch & yarn start:raw)",
-		"watch": "tsc --watch"
+		"watch": "tsc --watch",
+		"version": "node -e \"console.log(require('./package.json').version)\"",
+		"docker:build": "docker build -t yourapps:latest -t \"yourapps:$(yarn version)\" .",
+		"docker:up": "docker compose up",
+		"docker:start": "yarn docker:build && yarn docker:up"
 	},
 	"engineStrict": true,
 	"engines": {

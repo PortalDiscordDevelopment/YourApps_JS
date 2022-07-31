@@ -38,18 +38,18 @@ export class ConfigPositionsOpenCommand extends BotCommand {
 					name: positionName
 				})
 			);
-        if (!position.closed)
-            return interaction.editReply(
-                await this.t(interaction, {
-                    context: 'already_open',
-                    position: positionName
-                })
-            )
-        position.closed = false;
-        await position.save();
-        return interaction.editReply(
-            await this.t(interaction, { position: positionName })
-        )
+		if (!position.closed)
+			return interaction.editReply(
+				await this.t(interaction, {
+					context: 'already_open',
+					position: positionName
+				})
+			);
+		position.closed = false;
+		await position.save();
+		return interaction.editReply(
+			await this.t(interaction, { position: positionName })
+		);
 	}
 
 	// Autocomplete positions based on a substring search

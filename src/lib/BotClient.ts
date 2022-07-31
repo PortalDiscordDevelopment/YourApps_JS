@@ -63,10 +63,3 @@ export class BotClient extends SapphireClient {
 		return this.login(config.token);
 	}
 }
-
-declare module '@sapphire/pieces' {
-	interface Container {
-		database: Sequelize;
-		t: typeof resolveKey;
-	}
-}

@@ -16,6 +16,7 @@ import type {
 import * as config from '../options/config';
 import type { BotClient } from './BotClient';
 import { Utils } from './Utils';
+import { container } from '@sapphire/pieces';
 
 export type LocalizationOptions = TOptions<{
 	/**
@@ -114,7 +115,7 @@ export class BotCommand extends Command {
 	): Promise<string | EmbedFieldData> {
 		if (!options?.embedField && typeof keyOrOptions == 'string') {
 			// Second overload, normal string lookup
-			return this.container.t(
+			return container.t(
 				interaction,
 				keyOrOptions.includes(':') // Add commands/${this.name} if absent
 					? keyOrOptions
@@ -123,7 +124,7 @@ export class BotCommand extends Command {
 			);
 		} else if (!options?.embedField && typeof keyOrOptions != 'string') {
 			// First overload, normal string lookup
-			return this.container.t(
+			return container.t(
 				interaction,
 				`commands/${this.name}:response`,
 				keyOrOptions ?? {}
@@ -133,7 +134,7 @@ export class BotCommand extends Command {
 			const obj: {
 				title: string;
 				body: string;
-			} = await this.container.t(
+			} = await container.t(
 				interaction,
 				keyOrOptions.includes(':') // Add commands/${this.name} if absent
 					? keyOrOptions
@@ -154,14 +155,10 @@ export class BotCommand extends Command {
 			const obj: {
 				title: string;
 				body: string;
-			} = await this.container.t(
-				interaction,
-				`commands/${this.name}:response`,
-				{
-					...options,
-					returnObjects: true
-				}
-			);
+			} = await container.t(interaction, `commands/${this.name}:response`, {
+				...options,
+				returnObjects: true
+			});
 			return {
 				name: obj.title,
 				value: obj.body,
